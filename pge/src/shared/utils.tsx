@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
-import { requestAccessLayer, userDefaults } from '../config';
+import { requestAccessLayer,  userDefaults } from '../config';
 import { Invitation } from '../types/types';
 
 const {
@@ -46,7 +46,7 @@ const createEmailMessage = (invitation: Invitation) => {
             <p>Sincerely,<br>SCE PSPS Portal Team</p>
         </div>
             `;
-
+            
         case 'Microgrid_Portal_only':
             return `<div>
             <p>Hello,</p>

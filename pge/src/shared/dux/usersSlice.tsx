@@ -5,7 +5,6 @@ import { fetchFeaturesFromLayer } from '../requestUtils';
 import axios from 'axios';
 import { searchUsers } from '@esri/arcgis-rest-portal';
 import { UserSession } from '@esri/arcgis-rest-auth';
-import { renderPGEPortalTypes } from '../utils';
 
 const {
     url: requestAccessLayerUrl,

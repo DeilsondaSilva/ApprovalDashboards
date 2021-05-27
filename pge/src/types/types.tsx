@@ -16,7 +16,7 @@ export type Invitation = {
     groups: string;
     userCreditAssignment: number;
     applyActUserDefaults: boolean;
-    pgeportaltypes: string;
+    pgeportaltypes:  string;
 };
 
 export type GenericResponse = {

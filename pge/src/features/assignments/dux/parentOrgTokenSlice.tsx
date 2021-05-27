@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { parentPortalUrl} from '../../../config';
+import { parentPortalUrl } from '../../../config';
 import { RootState } from '../../../redux_setup/store';
 import axios from 'axios';
 import { requestAccessLayer, userDefaults } from '../../../config';
@@ -41,10 +41,10 @@ export const fetchParentOrgToken = createAsyncThunk(
         try {
             let formData = new FormData();
             formData.append('client', 'referer');
-            formData.append('referer', window.location.protocol +"//"+ window.location.hostname);
+            formData.append('referer', window.location.protocol + "//" + window.location.hostname);
             formData.append('username', args.username);
             formData.append('password', args.password);
-            
+
             const RESPONSE = await axios.post(
                 `${parentPortalUrl}sharing/rest/generateToken?expiration=180&f=json`, formData
             );

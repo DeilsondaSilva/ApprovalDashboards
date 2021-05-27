@@ -20,11 +20,13 @@ type LoginFormValues = {
 };
 
 const ParentOrgLogin = () => {
+    
     const dispatch = useDispatch();
     const { user, userCredential } = useAuth();
 
     const onFinish = ({ username, password }: LoginFormValues) => {
-        dispatch(fetchParentOrgToken({ username, password, user, credential: userCredential }));
+         dispatch(fetchParentOrgToken({ username, password, user, credential: userCredential }));
+       // console.log(resultAction);
     };
 
     return (
