@@ -4,7 +4,6 @@ import { RootState } from '../../../redux_setup/store';
 import axios from 'axios';
 import { requestAccessLayer, userDefaults } from '../../../config';
 import { fetchFeaturesFromLayer, addUsersToGroup } from '../../../shared/requestUtils';
-
 import { ApprovalStatusType } from '../../../types/types';
 
 
@@ -34,6 +33,7 @@ export type FetchParentOrgTokenArgs = {
     user: __esri.PortalUser;
     credential: __esri.Credential;
 };
+
 
 export const fetchParentOrgToken = createAsyncThunk(
     'parentOrgToken/fetchParentOrgToken',
