@@ -1,7 +1,6 @@
 import React from 'react';
 import { fetchParentOrgToken } from './dux/parentOrgTokenSlice';
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../../shared/contexts/auth-context';
 import { Card, Form, Input, Button } from 'antd';
 import { useAuth } from '../../shared/contexts/auth-context';
 import PageLayout from '../../shared/components/PageLayout';
@@ -21,7 +20,7 @@ type LoginFormValues = {
 };
 
 const ParentOrgLogin = () => {
-    const { user, userCredential } = useAuth();
+    
     const dispatch = useDispatch();
     const { user, userCredential } = useAuth();
 
