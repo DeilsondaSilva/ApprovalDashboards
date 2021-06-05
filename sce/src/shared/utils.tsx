@@ -8,6 +8,7 @@ const {
         firstName,
         lastName,
         email,
+        username,
         objectid,
         globalid,
         organizationName,
@@ -60,6 +61,20 @@ const shuffleArray = (array: string[]) => {
     return array;
 };
 
+const updateUserNames = (newUsers:Array<any>, existingUserArray:Array<any>)=>{
+    let new_user_requests = existingUserArray.map((user)=>{
+        const newUser = newUsers.filter((usr)=>{
+            return usr.email == user[email]
+        });
+        if(newUser && newUser.length>0){
+            user[username] = newUser[0].username;
+        }
+        return user;
+      }) 
+    
+    return new_user_requests;
+}
+
 const generateOneTimePassword = (passwordLength: number) => {
     const NUMBER_CHARS = '0123456789';
     const UPPER_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -97,6 +112,24 @@ const createInvitation = (user: any): Invitation => {
         username: user[email],
     };
 };
+
+const createNewUserInvitation = (user: any): Invitation => {
+    return {
+        email: user[email],
+        firstname: user[firstName],
+        lastname: user[lastName],
+        password: generateOneTimePassword(12),
+        role,
+        userLicenseType,
+        fullname: `${user[firstName]} ${user[lastName]}`,
+        userType,
+        groups: childGroups.join(','),
+        userCreditAssignment,
+        applyActUserDefaults,
+        username: `${user[firstName]}.${user[lastName]}_pspsce`.replace(' ',''),
+    };
+};
+
 
 const renderObjectId = (objectId: number): string => objectId.toString();
 
@@ -206,8 +239,10 @@ export {
     renderTitle,
     renderDate,
     renderTermsAndConditions,
+    updateUserNames,
     createEmailMessage,
     createInvitation,
+    createNewUserInvitation,
     renderMFAStatus,
     exportCSV,
 };

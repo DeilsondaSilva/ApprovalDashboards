@@ -62,7 +62,7 @@ const getAuthProps = async (): Promise<any> => {
     const USER_IS_ADMIN = await isUserAdmin(PORTAL);
 
     const params = {
-        q: `group:${genericGroupId}`,
+        q: `*`,
         num: 10,
         start: 1,
         sortField: 'username',
