@@ -27,6 +27,7 @@ const {
         phoneNumber,
         creationDate,
         agreeToTermsAndConditions,
+        username
     },
 } = requestAccessLayer;
 

@@ -21,6 +21,7 @@ const {
         agreeToTermsAndConditions,
         agencyType,
         MFAOptin,
+        username
     },
     whereClause,
 } = requestAccessLayer;
@@ -55,6 +56,7 @@ export const fetchUserRequests = createAsyncThunk(
             title,
             phoneNumber,
             email,
+            username, 
             agreeToTermsAndConditions,
             agencyType,
             MFAOptin,

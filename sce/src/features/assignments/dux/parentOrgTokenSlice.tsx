@@ -7,10 +7,9 @@ import { fetchFeaturesFromLayer, addUsersToGroup } from '../../../shared/request
 
 import { ApprovalStatusType } from '../../../types/types';
 
-
 const {
     url: requestAccessLayerUrl,
-    fieldNames: { email: requestAccessEmailFieldName },
+    fieldNames: { username: username},
 } = requestAccessLayer;
 
 const initialState = {
@@ -18,9 +17,7 @@ const initialState = {
     status: 'idle',
 };
 
-const fetchApprovedUserRequestAccessLayerFeatures = async (
-    token: string,
-): Promise<Array<__esri.Graphic>> => {
+const fetchApprovedUserRequestAccessLayerFeatures = async (token: string): Promise<Array<__esri.Graphic>> => {
     const WHERE_CLAUSE = `approval_status_edit_date >= CURRENT_TIMESTAMP-1 and approval_status='${ApprovalStatusType.Approved}'`;
 
     const FEATURES = await fetchFeaturesFromLayer(requestAccessLayerUrl, token, WHERE_CLAUSE, ['*'], false);
@@ -61,7 +58,11 @@ export const fetchParentOrgToken = createAsyncThunk(
                     async (user: any, idx: any): Promise<any> => {
                         try {
                             const GROUP_ADDS = userDefaults.parentGroups.map(groupId => {
-                                return addUsersToGroup([user.attributes[requestAccessEmailFieldName]], RESPONSE.data.token, groupId);
+                                return addUsersToGroup(
+                                    [user.attributes[username]],
+                                    RESPONSE.data.token,
+                                    groupId,
+                                );
                             });
 
                             await Promise.all(GROUP_ADDS);
