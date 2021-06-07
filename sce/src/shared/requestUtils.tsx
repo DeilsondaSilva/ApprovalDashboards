@@ -83,13 +83,15 @@ const addUsersToCommunity = async (invitations: any[], token: string) => {
 };
 
 const createNewUsernames = async (users: Array<any>, existingUsers: Array<any>, token: string) => {
-    const newUsers = users.filter((user)=> {return existingUsers.indexOf(user[email])>-1});
+    const newUsers = users.filter(user => {
+        return existingUsers.indexOf(user[email]) > -1;
+    });
     const INVITATIONS = newUsers.map(createNewUserInvitation);
     let response = null;
     // Add the users to the community.
     try {
         response = await addUsersToCommunity(INVITATIONS, token);
-        if(response.success && response.notInvited.length==0){
+        if (response.success && response.notInvited.length == 0) {
             // Send the emails to the users.
             try {
                 const NOTIFICATIONS = INVITATIONS.map((invitation: Invitation) => {
@@ -105,10 +107,12 @@ const createNewUsernames = async (users: Array<any>, existingUsers: Array<any>, 
         console.error(err);
     }
 
-    
-
-   
-    return {'response': response, 'newUser': INVITATIONS.filter((invitation)=>{ return {'username': invitation.username, 'email': invitation.email}})};
+    return {
+        response: response,
+        newUser: INVITATIONS.filter(invitation => {
+            return { username: invitation.username, email: invitation.email };
+        }),
+    };
 };
 
 const inviteUsers = async (users: Array<any>, token: string) => {
@@ -117,7 +121,7 @@ const inviteUsers = async (users: Array<any>, token: string) => {
     // Add the users to the community.
     try {
         response = await addUsersToCommunity(INVITATIONS, token);
-        if(response.success && response.notInvited.length==0){
+        if (response.success && response.notInvited.length == 0) {
             // Send the emails to the users.
             try {
                 const NOTIFICATIONS = INVITATIONS.map((invitation: Invitation) => {
@@ -133,9 +137,6 @@ const inviteUsers = async (users: Array<any>, token: string) => {
         console.error(err);
     }
 
-    
-
-   
     return response;
 };
 
@@ -165,19 +166,34 @@ const fetchFeaturesFromLayer = async (
 };
 
 const updateApprovalStatus = async (
-    userRequests: Array<any>,
+    existingUserArray: Array<any>,
+    newUsers: Array<any>,
     status: ApprovalStatusType,
     token: string,
 ): Promise<string> => {
-    const UPDATES = userRequests.map(request => {
-        return {
-            attributes: {
-                [objectid]: request[objectid],
-                [approvalStatus]: status,
-                [username]: request[username],
-                [approvalStatusEditDate]: Date.now(),
-            },
-        };
+    const UPDATES = existingUserArray.map(request => {
+        if (newUsers.length > 0) {
+            const newUser = newUsers.filter(usr => {
+                return usr.email == request[email];
+            })[0];
+            return {
+                attributes: {
+                    [objectid]: request[objectid],
+                    [approvalStatus]: status,
+                    [username]: newUser[username],
+                    [approvalStatusEditDate]: Date.now(),
+                },
+            };
+        } else {
+            return {
+                attributes: {
+                    [objectid]: request[objectid],
+                    [approvalStatus]: status,
+                    [username]: request[email],
+                    [approvalStatusEditDate]: Date.now(),
+                },
+            };
+        }
     });
     const FORM_DATA = new FormData();
 
@@ -200,8 +216,12 @@ const updateExistingUserApprovalStatus = async (
     rejectedStatus: ApprovalStatusType,
     token: string,
 ): Promise<string> => {
-    const approvedRequests = userRequests.filter((user)=> {return existingUsers.indexOf(user[email])==-1});
-    const rejectedRequests =  userRequests.filter((user)=> {return existingUsers.indexOf(user[email])>-1});
+    const approvedRequests = userRequests.filter(user => {
+        return existingUsers.indexOf(user[email]) == -1;
+    });
+    const rejectedRequests = userRequests.filter(user => {
+        return existingUsers.indexOf(user[email]) > -1;
+    });
     const APPROVED_UPDATES = approvedRequests.map(request => {
         return {
             attributes: {
@@ -223,7 +243,7 @@ const updateExistingUserApprovalStatus = async (
         };
     });
 
-    const UPDATES =APPROVED_UPDATES.concat(REJECTED_UPDATES);
+    const UPDATES = APPROVED_UPDATES.concat(REJECTED_UPDATES);
     const FORM_DATA = new FormData();
 
     FORM_DATA.append('updates', JSON.stringify(UPDATES));
@@ -238,4 +258,11 @@ const updateExistingUserApprovalStatus = async (
     }
 };
 
-export { fetchFeaturesFromLayer, updateApprovalStatus, updateExistingUserApprovalStatus, inviteUsers,createNewUsernames, addUsersToGroup };
+export {
+    fetchFeaturesFromLayer,
+    updateApprovalStatus,
+    updateExistingUserApprovalStatus,
+    inviteUsers,
+    createNewUsernames,
+    addUsersToGroup,
+};
