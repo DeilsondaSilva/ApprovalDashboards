@@ -25,24 +25,24 @@ const { role, userLicenseType, userType, childGroups, userCreditAssignment, appl
 
 const createEmailMessage = (invitation: Invitation) => {
     return `
-    <div>
-    <p>Hello,</p>
-    <p>Your account to access Southern California Edison’s (SCE) Public Safety Portal has been created. Below are your account login credentials:</p>
-    <p><span><b>Portal Login URL: </b><a href="https://overview.publicsafetyportaltest.sce.com/">PSPS Public Safety Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
+   <div>
+    <p>Hello ${invitation.firstname},</p>
+    <p>Your account to access Southern California Edison’s (SCE) Public Safety Partner Portal has been created. Below are your account login credentials:</p>
+    <p><span><b>Portal Login URL: </b><a href="https://overview.publicsafetyportal.sce.com/">Public Safety Partner Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
     <p><u>First-time Login Instructions:</u></p>
     <ol>
-       <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pspspartnerportal.sce.com/">https://pspspartnerportal.sce.com/</a><a href="https://pspspartnerportal.sce.com/"></a></li>
+       <li><span>Navigate your browser to the Portal Login URL </span><a href="https://publicsafetyportal.sce.com/" target="_blank">https://publicsafetyportal.sce.com</a></li>
        <li>Click the ‘Sign In’ button</li>
        <li>Choose ArcGIS login to enter in your newly created credentials</li>
        <ul>
-          <li>Note: The first login will force a password reset
+          <li>Note: The first login will force a password reset</li>
        </ul>
        <li>Click Approve</li>
     </ol>
-    <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Public Safety Portal.&nbsp;</b></p>
+    <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Public Safety Portal. </b></p>
     <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please send an email to <b>publicsafetyportal@sce.com</b></p>
     Thank you again for your interest in our Public Safety Power Shutoff Program and our efforts to reduce wildfire risks and keep our customers and communities safe.
-    <p>Sincerely,<br>SCE PSPS Portal Team</p>
+    <p>Sincerely,<br />SCE PSPS Portal Team</p>
  </div>
     `;
 };
@@ -60,20 +60,6 @@ const shuffleArray = (array: string[]) => {
 
     return array;
 };
-
-const updateUserNames = (newUsers:Array<any>, existingUserArray:Array<any>)=>{
-    let new_user_requests = existingUserArray.map((user)=>{
-        const newUser = newUsers.filter((usr)=>{
-            return usr.email == user[email]
-        });
-        if(newUser && newUser.length>0){
-            user[username] = newUser[0].username;
-        }
-        return user;
-      }) 
-    
-    return new_user_requests;
-}
 
 const generateOneTimePassword = (passwordLength: number) => {
     const NUMBER_CHARS = '0123456789';
@@ -126,10 +112,9 @@ const createNewUserInvitation = (user: any): Invitation => {
         groups: childGroups.join(','),
         userCreditAssignment,
         applyActUserDefaults,
-        username: `${user[firstName]}.${user[lastName]}_pspsce`.replace(' ',''),
+        username: `${user[firstName]}.${user[lastName]}_pspsce`.replace(' ', ''),
     };
 };
-
 
 const renderObjectId = (objectId: number): string => objectId.toString();
 
@@ -208,7 +193,7 @@ const renderTermsAndConditions = (termsAndConditions: string): JSX.Element => {
 const exportCSV = (requests: any[], filename: string): void => {
     const HIDDEN_ELEMENT = document.createElement('a');
     let csv =
-        'ObjectID,GlobalID,First Name,Last Name,Title,Organization Name,Organization Type,Email,MFA Status,Phone Number,Request Date,Agree To Terms and Conditions\n';
+        'ObjectID,GlobalID,First Name,Last Name,Title,Organization Name,Organization Type,Email,Username, MFA Status,Phone Number,Request Date,Agree To Terms and Conditions\n';
 
     requests.forEach((request: any) => {
         console.log('request: ', request);
@@ -220,6 +205,7 @@ const exportCSV = (requests: any[], filename: string): void => {
         csv += `"${request[organizationName]}",`;
         csv += `"${renderOrganizationType(request[agencyType])}",`;
         csv += `"${request[email]}",`;
+        csv += `"${request[username]}",`;
         csv += `"${renderMFAStatus(request[MFAOptin])}",`;
         csv += `"${renderPhoneNumber(request[phoneNumber])}",`;
         csv += `"${renderDate(request[creationDate])}",`;

@@ -4,8 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectSelectedUserRequests } from './dux/selectedUserRequestsSlice';
 import { fetchUserRequests } from './dux/userRequestsSlice';
 import { fetchUsers } from '../../shared/dux/usersSlice';
-import { updateApprovalStatus, inviteUsers, createNewUsernames, updateExistingUserApprovalStatus } from '../../shared/requestUtils';
-import { exportCSV, updateUserNames } from '../../shared/utils';
+import {
+    updateApprovalStatus,
+    inviteUsers,
+    createNewUsernames,
+    updateExistingUserApprovalStatus,
+} from '../../shared/requestUtils';
+import { exportCSV } from '../../shared/utils';
 import { useAuth } from '../../shared/contexts/auth-context';
 import { ApprovalStatusType } from '../../types/types';
 
@@ -19,59 +24,67 @@ const ApproveButton = () => {
 
     const handleClick = async () => {
         setLoading(true);
-       
 
         const inviteUsersResponse = await inviteUsers(SELECTED_USER_REQUESTS, userCredential.token);
-        if(inviteUsersResponse.success && inviteUsersResponse.notInvited.length>0){
+        if (inviteUsersResponse.success && inviteUsersResponse.notInvited.length > 0) {
             confirm({
                 title: 'Create new usernames',
-                content: 'User(s) '+ inviteUsersResponse.notInvited.join(',') +'already exists in the org',
-                onOk: async()=>{
-                  const createNewUsernameResponse= await createNewUsernames(SELECTED_USER_REQUESTS, inviteUsersResponse.notInvited,userCredential.token);
-                  let new_user_requests = updateUserNames(createNewUsernameResponse.newUser,SELECTED_USER_REQUESTS)
-                  if(createNewUsernameResponse.response.success){
-                    const RESPONSE = await updateApprovalStatus(
-                        new_user_requests,
-                        ApprovalStatusType.Approved,
+                content: 'User(s) ' + inviteUsersResponse.notInvited.join(',') + 'already exists in the org',
+                onOk: async () => {
+                    const createNewUsernameResponse = await createNewUsernames(
+                        SELECTED_USER_REQUESTS,
+                        inviteUsersResponse.notInvited,
                         userCredential.token,
                     );
-        
-                    exportCSV(SELECTED_USER_REQUESTS, 'approved_users');
-            
-                    if (RESPONSE === 'success') {
-                        message.success('Successfully approved users.');
-                    } else {
-                        message.error('Failed to approve users.');
+                    if (createNewUsernameResponse.response.success) {
+                        const RESPONSE = await updateApprovalStatus(
+                            SELECTED_USER_REQUESTS,
+                            createNewUsernameResponse.newUser,
+                            ApprovalStatusType.Approved,
+                            userCredential.token,
+                        );
+
+                        exportCSV(SELECTED_USER_REQUESTS, 'approved_users');
+
+                        if (RESPONSE === 'success') {
+                            message.success('Successfully approved users.');
+                        } else {
+                            message.error('Failed to approve users.');
+                        }
+                        dispatch(fetchUserRequests({ credential: userCredential }));
+                        dispatch(fetchUsers({ user, credential: userCredential }));
+                        setLoading(false);
                     }
-                  }
                 },
-                onCancel: async()=> {
+                onCancel: async () => {
                     const RESPONSE = await updateExistingUserApprovalStatus(
                         SELECTED_USER_REQUESTS,
-                        inviteUsersResponse,
+                        inviteUsersResponse.notInvited,
                         ApprovalStatusType.Approved,
                         ApprovalStatusType.Rejected,
                         userCredential.token,
                     );
+                    dispatch(fetchUserRequests({ credential: userCredential }));
+                    dispatch(fetchUsers({ user, credential: userCredential }));
+                    setLoading(false);
                 },
-              });
-        } else if(inviteUsersResponse.success) {
+            });
+        } else if (inviteUsersResponse.success) {
             const RESPONSE = await updateApprovalStatus(
                 SELECTED_USER_REQUESTS,
+                [],
                 ApprovalStatusType.Approved,
                 userCredential.token,
             );
 
             exportCSV(SELECTED_USER_REQUESTS, 'approved_users');
-    
+
             if (RESPONSE === 'success') {
                 message.success('Successfully approved users.');
             } else {
                 message.error('Failed to approve users.');
             }
         }
-
-        
 
         dispatch(fetchUserRequests({ credential: userCredential }));
         dispatch(fetchUsers({ user, credential: userCredential }));
