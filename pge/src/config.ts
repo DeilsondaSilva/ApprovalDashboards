@@ -1,11 +1,18 @@
-// https://pspsportal.maps.arcgis.com/home/item.html?id=d4afc8cef0f84ef69b3202f54232728f#settings
-export const appId = '6n0UweIWIVl1Xz3t';
-export const approverGroupId = 'f91e67e04d364ce5be20a60b0dc27d05';
-export const genericGroupId = 'e57e85195061401ea12478d9401d37c1';
-export const groupsTableItemId = 'e5c1d7f3ee944cd2a27f333919df57a4';
+// https://pge-psps-portal.maps.arcgis.com/home/item.html?id=54386be05db54aca8af19a7b38b51719#settings
+export const appId = 'vjWH2N1N0plFPAGb';
+
+// https://pge-psps-portal.maps.arcgis.com/home/group.html?id=ce02f7029a804b79beee3e03a3fbcb49#overview
+export const approverGroupId = 'ce02f7029a804b79beee3e03a3fbcb49';
+
+// https://geomartawrrqa.maps.arcgis.com/home/group.html?id=e6569d81a8bf464aae2b44b0b5cab1de#overview
+export const genericGroupId = 'e6569d81a8bf464aae2b44b0b5cab1de';
+
+// https://geomartawrrqa.maps.arcgis.com/home/item.html?id=d5a9a473fe914985bc7500062ed1c553
+export const groupsTableItemId = 'd5a9a473fe914985bc7500062ed1c553';
+
+// https://geomartawrrqa.maps.arcgis.com/home/item.html?id=d13ee7a039fb41749415c849d8087c58
 export const requestAccessLayer = {
-    url:
-        'https://services6.arcgis.com/o8cuqyt0UuuW4fcP/arcgis/rest/services/service_329fee9d59e842ec817db4541e034cad/FeatureServer/0',
+    url: 'https://services.arcgis.com/l5ho40vpsThFdzcg/arcgis/rest/services/Reuest%20Access_TST/FeatureServer/0',
     fieldNames: {
         objectid: 'objectid',
         globalid: 'globalid',
@@ -21,27 +28,25 @@ export const requestAccessLayer = {
         email: 'work_email_address',
         agreeToTermsAndConditions: 'select_one',
         organizationType: 'organization_type',
+        pgeportaltypes: 'pgeportaltypes',
     },
     whereClause: 'approval_status IS NULL AND your_title IS NOT NULL',
 };
 
-export const parentPortalUrl = 'https://pgegisportal.maps.arcgis.com/';
-export const childPortalUrl = 'https://pspsportal.maps.arcgis.com/';
-export const webAppUrl = 'https://portalrequest.ss.pge.com';
-export const portalLoginUrl = 'https://overview.pspsportal.pge.com/';
+export const parentPortalUrl = 'https://geomartawrrqa.maps.arcgis.com';
+export const childPortalUrl = 'https://pge-psps-portal.maps.arcgis.com';
+export const webAppUrl = 'https://portalrequesttest.nonprod.pge.com';
+export const portalLoginUrl = 'https://overview.pspsportaltest.pge.com/';
 
 export const userDefaults = {
-    role: 'RpHsnIyh5r06ui1Y',
+    role: 'E2kSKSFYWnQ1lMA0',
     userLicenseType: 'creatorUT',
-    userType: 'creatorUT',
-    // Community Group
-    childGroups: ['df6230668de6493b9aa9c0a7fc3ef02e', '3dd9cd916cc8461998c9dfa4b6daebe2'],
+    userType: 'arcgisonly',
+    childGroups: ['f64837df711d4825bfe8e39880a97e40'],
     parentGroups: [
-        // Followers Group
-        // PSPS Content Group
-        '9f962e5e5aaf424ba62aad6f392812a9',
-        // Generic Group
-        'e57e85195061401ea12478d9401d37c1',
+        'fd2a565827884ac3a2443ab44f7ea8f0',
+        '4bf3a93f575e4c6cb515393cfc0cfb20',
+        'e6569d81a8bf464aae2b44b0b5cab1de',
     ],
     userCreditAssignment: -1,
     applyActUserDefaults: false,

@@ -27,12 +27,12 @@ const createEmailMessage = (invitation: Invitation) => {
         case 'PSPS_Portal_only':
             return `
             <div>
-            <p>Hello,</p>
-            <p>Your account to access Southern California Edison’s (SCE) Public Safet Portal has been created. Below are your account login credentials:</p>
-            <p><span><b>Portal Login URL: </b><a href="https://overview.publicsafetyportaltest.sce.com/">PSPS Public Safety Portal</a><br></span><span><b>Username :</b>${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
+            <p>Hello ${invitation.firstname},</p>
+            <p>Your account to access PGE PSPS Portal has been created. Below are your account login credentials:</p>
+            <p><span><b>Portal Login URL: </b><a href="https://overview.pspsportalqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
             <p><u>First-time Login Instructions:</u></p>
             <ol>
-            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pspspartnerportal.sce.com/">https://pspspartnerportal.sce.com/</a><a href="https://pspspartnerportal.sce.com/"></a></li>
+            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://overview.pspsportalqa.pge.com/">https://overview.pspsportalqa.pge.com/</a><a href="https://overview.pspsportalqa.pge.com/"></a></li>
             <li>Click the ‘Sign In’ button</li>
             <li>Choose ArcGIS login to enter in your newly created credentials</li>
             <ul>
@@ -40,16 +40,16 @@ const createEmailMessage = (invitation: Invitation) => {
             </ul>
             <li>Click Approve</li>
             </ol>
-            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Public Safety Portal.&nbsp;</b></p>
-            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please email <a href ="mailto:publicsafetyportal@sce.com">publicsafetyportal@sce.com</a></p>
+            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the PSPS Portal.&nbsp;</b></p>
+            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please send an email to <b>MicrogridPortal@pge.com</b></p>
             Thank you again for your interest in our Public Safety Power Shutoff Program and our efforts to reduce wildfire risks and keep our customers and communities safe.
-            <p>Sincerely,<br>SCE PSPS Portal Team</p>
+            <p>Sincerely,<br>PGE PSPS Team</p>
         </div>
             `;
             
         case 'Microgrid_Portal_only':
             return `<div>
-            <p>Hello,</p>
+            <p>Hello ${invitation.firstname},</p>
             <p>Your account to access PGE Microgrid Portal has been created. Below are your account login credentials:</p>
             <p><span><b>Portal Login URL: </b><a href="https://overview.microgridportalqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
             <p><u>First-time Login Instructions:</u></p>
@@ -71,12 +71,12 @@ const createEmailMessage = (invitation: Invitation) => {
         case 'Both_PG&E_Portals':
             return `
             <div>
-            <p>Hello,</p>
-            <p>Your account to access Southern California Edison’s (SCE) Public Safet Portal has been created. Below are your account login credentials:</p>
-            <p><span><b>Portal Login URL: </b><a href="https://overview.publicsafetyportaltest.sce.com/">PSPS Public Safety Portal</a><br></span><span><b>Username :</b>${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
+            <p>Hello ${invitation.firstname},</p>
+            <p>Your account to access both PGE Portals has been created. Below are your account login credentials:</p>
+            <p><span><b>Portal Login URL: </b><a href="https://pspsportalqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
             <p><u>First-time Login Instructions:</u></p>
             <ol>
-            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pspspartnerportal.sce.com/">https://pspspartnerportal.sce.com/</a><a href="https://pspspartnerportal.sce.com/"></a></li>
+            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pspsportalqa.pge.com/">https://pspsportalqa.pge.com/</a><a href="https://pspsportalqa.pge.com/"></a></li>
             <li>Click the ‘Sign In’ button</li>
             <li>Choose ArcGIS login to enter in your newly created credentials</li>
             <ul>
@@ -84,21 +84,21 @@ const createEmailMessage = (invitation: Invitation) => {
             </ul>
             <li>Click Approve</li>
             </ol>
-            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Public Safety Portal.&nbsp;</b></p>
-            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please email <a href ="mailto:publicsafetyportal@sce.com">publicsafetyportal@sce.com</a></p>
+            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Microgrid Portal.&nbsp;</b></p>
+            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please send an email to <b>MicrogridPortal@pge.com</b></p>
             Thank you again for your interest in our Public Safety Power Shutoff Program and our efforts to reduce wildfire risks and keep our customers and communities safe.
-            <p>Sincerely,<br>SCE PSPS Portal Team</p>
+            <p>Sincerely,<br>PGE Microgrid Team</p>
         </div>
             `;
         default:
             return `
             <div>
-            <p>Hello,</p>
-            <p>Your account to access Southern California Edison’s (SCE) Public Safet Portal has been created. Below are your account login credentials:</p>
-            <p><span><b>Portal Login URL: </b><a href="https://overview.publicsafetyportaltest.sce.com/">PSPS Public Safety Portal</a><br></span><span><b>Username :</b>${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
+            <p>Hello ${invitation.firstname},</p>
+            <p>Your account to access PGE PSPS Portal has been created. Below are your account login credentials:</p>
+            <p><span><b>Portal Login URL: </b><a href="https://overview.pspsportalqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
             <p><u>First-time Login Instructions:</u></p>
             <ol>
-            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pspspartnerportal.sce.com/">https://pspspartnerportal.sce.com/</a><a href="https://pspspartnerportal.sce.com/"></a></li>
+            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://overview.pspsportalqa.pge.com/">https://overview.pspsportalqa.pge.com/</a><a href="https://overview.pspsportalqa.pge.com/"></a></li>
             <li>Click the ‘Sign In’ button</li>
             <li>Choose ArcGIS login to enter in your newly created credentials</li>
             <ul>
@@ -106,10 +106,10 @@ const createEmailMessage = (invitation: Invitation) => {
             </ul>
             <li>Click Approve</li>
             </ol>
-            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Public Safety Portal.&nbsp;</b></p>
-            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please email <a href ="mailto:publicsafetyportal@sce.com">publicsafetyportal@sce.com</a></p>
+            <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the PSPS Portal.&nbsp;</b></p>
+            <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please send an email to <b>MicrogridPortal@pge.com</b></p>
             Thank you again for your interest in our Public Safety Power Shutoff Program and our efforts to reduce wildfire risks and keep our customers and communities safe.
-            <p>Sincerely,<br>SCE PSPS Portal Team</p>
+            <p>Sincerely,<br>PGE PSPS Team</p>
         </div>
             `;
     }

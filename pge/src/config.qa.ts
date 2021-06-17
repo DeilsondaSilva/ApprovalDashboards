@@ -1,5 +1,5 @@
-// https://pge-psps-portal.maps.arcgis.com/home/item.html?id=15484086ad20495e8a9b0035bd6ad8f6#settings
-export const appId = 'X8Vht4uOsKYYVdEC';
+// https://pge-psps-portal.maps.arcgis.com/home/item.html?id=54386be05db54aca8af19a7b38b51719#settings
+export const appId = 'vjWH2N1N0plFPAGb';
 
 // https://pge-psps-portal.maps.arcgis.com/home/group.html?id=ce02f7029a804b79beee3e03a3fbcb49#overview
 export const approverGroupId = 'ce02f7029a804b79beee3e03a3fbcb49';
@@ -7,13 +7,12 @@ export const approverGroupId = 'ce02f7029a804b79beee3e03a3fbcb49';
 // https://geomartawrrqa.maps.arcgis.com/home/group.html?id=e6569d81a8bf464aae2b44b0b5cab1de#overview
 export const genericGroupId = 'e6569d81a8bf464aae2b44b0b5cab1de';
 
-// https://geomartawrrqa.maps.arcgis.com/home/item.html?id=46f691c47e1a4d72861fac4f64a5a28d
-export const groupsTableItemId = '46f691c47e1a4d72861fac4f64a5a28d';
+// https://geomartawrrqa.maps.arcgis.com/home/item.html?id=d5a9a473fe914985bc7500062ed1c553
+export const groupsTableItemId = 'd5a9a473fe914985bc7500062ed1c553';
 
 // https://geomartawrrqa.maps.arcgis.com/home/item.html?id=d13ee7a039fb41749415c849d8087c58
 export const requestAccessLayer = {
-    url:
-        'https://services.arcgis.com/l5ho40vpsThFdzcg/arcgis/rest/services/survey123_3831c70b2bcd4d759fee84fc55fe5f1c/FeatureServer/0',
+    url: 'https://services.arcgis.com/l5ho40vpsThFdzcg/arcgis/rest/services/Reuest%20Access_TST/FeatureServer/0',
     fieldNames: {
         objectid: 'objectid',
         globalid: 'globalid',
@@ -29,14 +28,15 @@ export const requestAccessLayer = {
         email: 'work_email_address',
         agreeToTermsAndConditions: 'select_one',
         organizationType: 'organization_type',
+        pgeportaltypes: 'pgeportaltypes',
     },
     whereClause: 'approval_status IS NULL AND your_title IS NOT NULL',
 };
 
 export const parentPortalUrl = 'https://geomartawrrqa.maps.arcgis.com';
 export const childPortalUrl = 'https://pge-psps-portal.maps.arcgis.com';
-export const webAppUrl = 'https://portalrequestdev.nonprod.pge.com';
-export const portalLoginUrl = 'https://overview.pspsportalqa.pge.com/';
+export const webAppUrl = 'https://portalrequesttest.nonprod.pge.com';
+export const portalLoginUrl = 'https://overview.pspsportaltest.pge.com/';
 
 export const userDefaults = {
     role: 'E2kSKSFYWnQ1lMA0',
