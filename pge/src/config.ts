@@ -12,7 +12,7 @@ export const groupsTableItemId = 'd5a9a473fe914985bc7500062ed1c553';
 
 // https://geomartawrrqa.maps.arcgis.com/home/item.html?id=d13ee7a039fb41749415c849d8087c58
 export const requestAccessLayer = {
-    url: 'https://services.arcgis.com/l5ho40vpsThFdzcg/arcgis/rest/services/Reuest%20Access_TST/FeatureServer/0',
+    url: 'https://services.arcgis.com/l5ho40vpsThFdzcg/arcgis/rest/services/survey123_3831c70b2bcd4d759fee84fc55fe5f1c/FeatureServer/0',
     fieldNames: {
         objectid: 'objectid',
         globalid: 'globalid',

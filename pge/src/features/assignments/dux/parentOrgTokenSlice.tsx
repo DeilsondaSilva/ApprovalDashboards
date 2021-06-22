@@ -6,7 +6,6 @@ import { requestAccessLayer, userDefaults } from '../../../config';
 import { fetchFeaturesFromLayer, addUsersToGroup } from '../../../shared/requestUtils';
 import { ApprovalStatusType } from '../../../types/types';
 
-
 const {
     url: requestAccessLayerUrl,
     fieldNames: { email: requestAccessEmailFieldName },
@@ -17,9 +16,7 @@ const initialState = {
     status: 'idle',
 };
 
-const fetchApprovedUserRequestAccessLayerFeatures = async (
-    token: string,
-): Promise<Array<__esri.Graphic>> => {
+const fetchApprovedUserRequestAccessLayerFeatures = async (token: string): Promise<Array<__esri.Graphic>> => {
     const WHERE_CLAUSE = `approval_status_edit_date >= CURRENT_TIMESTAMP-1 and approval_status='${ApprovalStatusType.Approved}'`;
 
     const FEATURES = await fetchFeaturesFromLayer(requestAccessLayerUrl, token, WHERE_CLAUSE, ['*'], false);
@@ -34,19 +31,19 @@ export type FetchParentOrgTokenArgs = {
     credential: __esri.Credential;
 };
 
-
 export const fetchParentOrgToken = createAsyncThunk(
     'parentOrgToken/fetchParentOrgToken',
     async (args: FetchParentOrgTokenArgs): Promise<string> => {
         try {
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append('client', 'referer');
-            formData.append('referer', window.location.protocol + "//" + window.location.hostname);
+            formData.append('referer', window.location.protocol + '//' + window.location.hostname);
             formData.append('username', args.username);
             formData.append('password', args.password);
 
             const RESPONSE = await axios.post(
-                `${parentPortalUrl}sharing/rest/generateToken?expiration=180&f=json`, formData
+                `${parentPortalUrl}sharing/rest/generateToken?expiration=180&f=json`,
+                formData,
             );
 
             if (RESPONSE.data.token) {
@@ -60,7 +57,11 @@ export const fetchParentOrgToken = createAsyncThunk(
                     async (user: any, idx: any): Promise<any> => {
                         try {
                             const GROUP_ADDS = userDefaults.parentGroups.map(groupId => {
-                                return addUsersToGroup([user.attributes[requestAccessEmailFieldName]], RESPONSE.data.token, groupId);
+                                return addUsersToGroup(
+                                    [user.attributes[requestAccessEmailFieldName]],
+                                    RESPONSE.data.token,
+                                    groupId,
+                                );
                             });
 
                             await Promise.all(GROUP_ADDS);

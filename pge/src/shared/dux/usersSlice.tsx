@@ -113,7 +113,7 @@ export const fetchUsers = createAsyncThunk(
             }
 
             const resultsUsernames = usersSearchResult.results.map((result: any) => result.username);
-            console.log("resultsUsernames: ", resultsUsernames)
+            console.log('resultsUsernames: ', resultsUsernames);
             const USER_FEATURES = await fetchRequestAccessLayerFeatures(resultsUsernames, TOKEN);
             const FEATURES_BY_USERNAME = mapFeaturesByUsername(USER_FEATURES);
             const USER_REQUEST_URL = `${args.user.portal.url}/sharing/rest/community/users/`;

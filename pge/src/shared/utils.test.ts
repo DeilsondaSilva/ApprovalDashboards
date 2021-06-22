@@ -35,7 +35,7 @@ describe('renderPGEPortalTypes', () => {
     each([
         ['PSPS_Portal_only', 'PSPS_Portal_only'],
         ['Microgrid_Portal_only', 'Microgrid_Portal_only'],
-        ['Both_PG&E_PortalsG', 'Both_PG&E_Portals'],
+        ['Both_PG&E_Portals', 'Both_PG&E_Portals'],
         ['Option_not_selected', 'Option_not_selected'],
     ]).test('Returns %s', (expected: string, pgeportaltypes: string) => {
         expect(renderPGEPortalTypes(pgeportaltypes)).toBe(expected);

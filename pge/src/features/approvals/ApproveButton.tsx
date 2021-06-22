@@ -11,7 +11,7 @@ import { ApprovalStatusType } from '../../types/types';
 
 const ApproveButton = () => {
     const SELECTED_USER_REQUESTS: any[] = useSelector(selectSelectedUserRequests);
-    console.log("SELECTED_USER_REQUESTS: ", SELECTED_USER_REQUESTS)
+    console.log('SELECTED_USER_REQUESTS: ', SELECTED_USER_REQUESTS);
     const [loading, setLoading] = useState(false);
     const { user, userCredential } = useAuth();
     const dispatch = useDispatch();

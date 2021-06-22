@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag } from 'antd';
-import { requestAccessLayer,  userDefaults } from '../config';
+import { requestAccessLayer, userDefaults } from '../config';
 import { Invitation } from '../types/types';
 
 const {
@@ -46,15 +46,15 @@ const createEmailMessage = (invitation: Invitation) => {
             <p>Sincerely,<br>PGE PSPS Team</p>
         </div>
             `;
-            
+
         case 'Microgrid_Portal_only':
             return `<div>
             <p>Hello ${invitation.firstname},</p>
             <p>Your account to access PGE Microgrid Portal has been created. Below are your account login credentials:</p>
-            <p><span><b>Portal Login URL: </b><a href="https://overview.microgridportalqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.username}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
+            <p><span><b>Portal Login URL: </b><a href="https://pgedataportalsqa.pge.com/">Microgrid Portal</a><br></span><span><b>Username :</b> ${invitation.email}<br></span><span><b>Temporary Password* :</b> ${invitation.password}<br></span><span>*Please note your temporary password will expire in 14 days</span></p>
             <p><u>First-time Login Instructions:</u></p>
             <ol>
-            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://overview.microgridportalqa.pge.com/">https://overview.microgridportalqa.pge.com/</a><a href="https://overview.microgridportalqa.pge.com/"></a></li>
+            <li><span>Navigate your browser to the Portal Login URL </span><a href="https://pgedataportalsqa.pge.com/">https://pgedataportalsqa.pge.com/</a><a href="https://pgedataportalsqa.pge.com/"></a></li>
             <li>Click the ‘Sign In’ button</li>
             <li>Choose ArcGIS login to enter in your newly created credentials</li>
             <ul>
@@ -64,7 +64,6 @@ const createEmailMessage = (invitation: Invitation) => {
             </ol>
             <p><b>We strongly encourage you to log in to your account at your earliest convenience to change your password and familiarize yourself with the Microgrid Portal.&nbsp;</b></p>
             <p>Attached for your reference is a quick start guide on how to log in and navigate through the portal for planning and event-specific information. If you have questions or need technical assistance, please send an email to <b>MicrogridPortal@pge.com</b></p>
-            Thank you again for your interest in our Public Safety Power Shutoff Program and our efforts to reduce wildfire risks and keep our customers and communities safe.
             <p>Sincerely,<br>PGE Microgrid Team</p>
         </div>
             `;
@@ -164,7 +163,7 @@ const createInvitation = (user: any): Invitation => {
         userCreditAssignment,
         applyActUserDefaults,
         username: user[email],
-        pgeportaltypes: user[pgeportaltypes]
+        pgeportaltypes: user[pgeportaltypes],
     };
 };
 
@@ -213,7 +212,6 @@ const renderPGEPortalTypes = (pgeportaltypes: string): string => {
     return pgeportaltypes;
 };
 
-
 const renderDate = (milliseconds: number): string => {
     const DATE = new Date(milliseconds);
     return `${DATE.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })}`;
@@ -249,7 +247,7 @@ const exportCSV = (requests: any[], filename: string): void => {
         'ObjectID,GlobalID,First Name,Last Name,Title,Organization Name,Organization Type,Email,User Type,Phone Number,Request Date,Agree To Terms and Conditions\n';
 
     requests.forEach((request: any) => {
-        console.log("request: ", request)
+        console.log('request: ', request);
         csv += `"${request[objectid].toString()}",`;
         csv += `"${request[globalid]}",`;
         csv += `"${request[firstName]}",`;

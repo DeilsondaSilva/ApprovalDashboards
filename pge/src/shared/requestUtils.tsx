@@ -15,7 +15,7 @@ const handleSendNotificationFail = (err: Error) => {
     console.error(err);
 };
 
-const sendNotification = async (invitation: Invitation, token:string): Promise<GenericResponse> => {
+const sendNotification = async (invitation: Invitation, token: string): Promise<GenericResponse> => {
     const MESSAGE = createEmailMessage(invitation);
     const SUBJECT = 'Important – PG&E Portals Account Log-In';
     const URL = `${childPortalUrl}/sharing/rest/portals/self/createNotification`;

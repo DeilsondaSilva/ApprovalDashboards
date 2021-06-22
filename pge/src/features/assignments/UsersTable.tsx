@@ -32,7 +32,7 @@ const UsersTable = () => {
             onFilter: (value: any, record: any) => {
                 const USERNAME = record.username ? record.username.toLowerCase() : '';
                 const NAME = record.name ? record.name.toLowerCase() : '';
-                const AGENCY = record.agency ? record.agency.toLowerCase() : ''; 
+                const AGENCY = record.agency ? record.agency.toLowerCase() : '';
                 const TERMSANDCONDITIONS = record.agreeToTermsAndConditions
                     ? record.agreeToTermsAndConditions.toLowerCase()
                     : '';
@@ -59,7 +59,7 @@ const UsersTable = () => {
         {
             title: 'User Type',
             width: 150,
-            dataIndex:'pgeportaltypes',        
+            dataIndex: 'pgeportaltypes',
         },
         {
             title: 'Terms & Conditions',
